@@ -1,0 +1,31 @@
+{
+  "name": "thinkjs-cmd",
+  "description": "create thinkjs project",
+  "version": "0.1.0",
+  "author": {
+    "name": "welefen",
+    "email": "welefen@gmail.com"
+  },
+  "dependencies": {
+    "thinkjs": "*",
+    "commander": "2.3.0",
+    "colors": "0.6.2"
+  },
+  "keywords": [
+    "thinkjs"
+  ],
+  "bin": {
+    "thinkjs": "./bin/thinkjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:75team/thinkjs-cmd.git"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/75team/thinkjs-cmd/issues"
+  }
+}
