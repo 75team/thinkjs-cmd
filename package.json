@@ -1,7 +1,7 @@
 {
   "name": "thinkjs-cmd",
   "description": "create thinkjs project",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": {
     "name": "welefen",
     "email": "welefen@gmail.com"
