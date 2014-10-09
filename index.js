@@ -68,14 +68,9 @@ function createProject(){
   }
   mkdir(projectpath, '0755');
   var excudePath = ['.git', '.svn', 'node_modules'];
-  var files = fs.readdirSync(projectpath).filter(function(item){
-    if (excudePath.indexOf(item) > -1) {
-      return;
-    }
-    return item;
-  });
-  if (files.length) {
-    console.log('path `' + projectpath + '` is not empty');
+  var files = fs.readdirSync(projectpath);
+  if (files.indexOf('App') > -1 || files.indexOf('www') > -1) {
+    console.log('path `' + projectpath + '` is a thinkjs project');
     return false;
   }
   mkpath(projectpath);
