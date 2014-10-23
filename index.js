@@ -6,7 +6,7 @@ var path = require('path');
 require('thinkjs/lib/Common/common.js');
 
 var argv = process.argv;
-if (argv.indexOf('-h') > -1) {
+if (argv.indexOf('-h') > -1 || argv.indexOf('--help') > -1) {
   console.log('Usage: thinkjs projectpath');
 }else if (argv.indexOf('-v') > -1) {
   var version = getVersion();
