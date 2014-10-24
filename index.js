@@ -30,7 +30,18 @@ argvs.slice(2).forEach(function(arg){
 })
 
 if (params.version) {
-  console.log(getVersion());
+  var chars = [
+    " _______ _     _       _        _  _____ ",
+    "|__   __| |   (_)     | |      | |/ ____|",
+    "   | |  | |__  _ _ __ | | __   | | (___  ",
+    "   | |  | '_ \\| | '_ \\| |/ /   | |\\___ \\ ",
+    "   | |  | | | | | | | |   < |__| |____) |",
+    "   |_|  |_| |_|_|_| |_|_|\\_\\____/|_____/ ",
+    "                                         "                                       
+  ].join("\n");
+  console.log('\n v' + getVersion() + '\n');
+  console.log(chars);
+  
 }else if (params.path) {
   createProject();
 }else{
@@ -82,9 +93,8 @@ function getFiles(dir, prefix){
  * @return {[type]} [description]
  */
 function getVersion(){
-  var argv = process.argv[2];
-  if (argv) {
-    var packageFile = argv + '/node_modules/thinkjs/package.json';
+  if (params.path) {
+    var packageFile = params.path + '/node_modules/thinkjs/package.json';
     if (isFile(packageFile)) {
       var content = fs.readFileSync(packageFile);
       content = JSON.parse(content);
