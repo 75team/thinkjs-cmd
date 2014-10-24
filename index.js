@@ -5,16 +5,55 @@ var path = require('path');
 
 require('thinkjs/lib/Common/common.js');
 
-var argv = process.argv;
-if (argv.indexOf('-h') > -1 || argv.indexOf('--help') > -1) {
-  console.log('Usage: thinkjs projectpath');
-}else if (argv.indexOf('-v') > -1) {
-  var version = getVersion();
-  console.log(version);
-}else{
-  createProject();
-}
+var argvs = process.argv;
+var params = {};
+argvs.slice(2).forEach(function(arg){
+  switch(arg){
+    case '-h':
+    case '--help':
+      params.help = true;
+      break;
+    case '-v':
+    case '--version':
+      params.version = true;
+      break;
+    case '-s':
+    case '--silent':
+      params.silent = true;
+      break;
+    default:
+      if (arg.indexOf('-') !== 0) {
+        params.path = arg;
+      }
+      break;
+  }
+})
 
+if (params.version) {
+  console.log(getVersion());
+}else if (params.path) {
+  createProject();
+}else{
+  showHelp();
+}
+/**
+ * [showHelp description]
+ * @return {[type]} [description]
+ */
+function showHelp(){
+  var data = [
+    '',
+    'Usage: thinkjs [options] <project-path>',
+    '',
+    'Options:',
+    '',
+    ' -h, --help          output usage information',
+    ' -v, --version       output thinkjs version',
+    " -s, --silent        create project, can't start service",
+    ''
+  ].join('\n  ');
+  console.log(data);
+}
 /**
  * 获取目录下的所有文件
  * @param  {[type]} dir    [description]
@@ -62,12 +101,8 @@ function getVersion(){
  * @return {[type]} [description]
  */
 function createProject(){
-  var projectpath = argv[2];
-  if (!projectpath) {
-    projectpath = '.';
-  }
+  var projectpath = params.path;
   mkdir(projectpath, '0755');
-  var excudePath = ['.git', '.svn', 'node_modules'];
   var files = fs.readdirSync(projectpath);
   if (files.indexOf('App') > -1 || files.indexOf('www') > -1) {
     console.log('path `' + projectpath + '` is a thinkjs project');
@@ -77,7 +112,9 @@ function createProject(){
   copyFiles(projectpath);
   console.log('Application create finished');
   copyThinkJS(projectpath);
-  startService(projectpath);
+  if (!params.silent) {
+    startService(projectpath);
+  }
 }
 
 /**
