@@ -172,6 +172,7 @@ function copyFiles(projectpath){
     prefixPath + '/index.js',
     prefixPath + '/gitignore.log',
     prefixPath + '/package.json',
+    prefixPath + '/bowerrc.json',
     prefixPath + '/README.md'
   ];
   var dstFiles = [
@@ -184,6 +185,7 @@ function copyFiles(projectpath){
     '/www/index.js',
     '/.gitignore',
     '/package.json',
+    '/.bowerrc',
     '/README.md'
   ];
   dstFiles.forEach(function(file, i) {
